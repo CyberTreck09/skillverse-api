@@ -1,18 +1,20 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-const MONGO_URI = "mongodb+srv://hassanhydara09:evoWOyN3fsQZ7SUY@skill-versep-api.kijbs.mongodb.net/?retryWrites=true&w=majority&appName=Skill-Verse-API"
+dotenv.config({path: './config/config.env'});
+
+const MONGO_URI = process.env.MONGODB_URI
+
 
 export const connectDB = async () => {
-    if (!MONGO_URI) {
-        throw new Error ("MONGO_URI environment variable is not defined")
-    }
+  if (!MONGO_URI) {
+    throw new Error("MONGO_URI environment variable is not defined");
+  }
 
-    try {
-        await mongoose.connect(MONGO_URI);  
-        console.log(`connected to mongodb successfully`)
-     
-    } catch(error: any) {
-        console.error(`failed to connect to mongoDB ${error.message}`)
-    }
-}
-
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log(`**** connected to mongodb successfully`.blue.bold);
+  } catch (error: any) {
+    console.error(`failed to connect to mongoDB ${error.message}`);
+  }
+};
