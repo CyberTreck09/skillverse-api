@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import Bootcamp from "../models/Bootcamp.model";
+import ErrorResponse from "../utils/customError";
 
 // @desc    Get all bootcamps
 // @route   GET /api/v1/bootcamps
@@ -9,8 +10,8 @@ export const getBootcamps = async (req: Request, res: Response, next: NextFuncti
         
         const bootcamps = await Bootcamp.find({})
         res.status(200).json({ success: true, data: bootcamps });
-    } catch (error) {
-        res.status(400).json({success: false})
+    } catch (err) {
+        next(err)
     }
 }
 
@@ -24,12 +25,14 @@ export const getBootcamp = async (req: Request, res: Response, next: NextFunctio
         const bootamp = await Bootcamp.findById({_id: req.params.id})
         console.log(bootamp)
         res
-        .status(200)
+        .status(200)    
         .json({ success: true, data: bootamp });
         
-    } catch (error) {
+    } catch (err: any) {
         // res.status(400).json({success: false})
-        next(error);
+        // next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+        next(err);
+        
     }
 }
 
@@ -43,8 +46,8 @@ export const createBootcamp = async (req: Request, res: Response, next: NextFunc
     
         res.status(201).json({ success: true, data: bootcamp });
         
-    } catch (error) {
-        res.status(400).json({succes: false})
+    } catch (err) {
+        next(err)
     }
 
 };
@@ -61,8 +64,8 @@ export const updateBootcamp = async (req: Request, res: Response, next: NextFunc
         res 
         .status(200)
         .json({ success: true, data: bootcamp });
-    } catch (error) {
-        res.status(400).json({json: false})
+    } catch (err) {
+        next(err)
     }
 }
 
@@ -80,8 +83,8 @@ export const deleteBootcamp = async (req: Request, res: Response, next: NextFunc
         .status(200)
         .json({ success: true, msg: deleteBootcamp });
         
-    } catch (error) {
-        res.status(400).json({success: false})
+    } catch (err) {
+        next(err)
     }
 }
 
