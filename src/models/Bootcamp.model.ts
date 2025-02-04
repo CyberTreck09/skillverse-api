@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { BootcampsType } from "../interface/bootcamp";
+import slugify from "slugify";
 
 
 const BootcampSchema = new mongoose.Schema<BootcampsType>({
@@ -99,6 +100,13 @@ const BootcampSchema = new mongoose.Schema<BootcampsType>({
     default: Date.now,
   },
 });
+
+BootcampSchema.pre('save', function(next)  {
+  this.slug = slugify(this.name, {lower: true})
+
+  next()
+
+})
 
 const Bootcamp = mongoose.model<BootcampsType>('Bootcamp', BootcampSchema);
 
