@@ -7,6 +7,7 @@ import morgan from 'morgan';
 const colors = require('colors')
 // import colors from 'colors';
 import { connectDB } from "./db/db";
+import CoursesRouter from "./routes/courses.routes";
 
 
 dotenv.config({ path: "./config/config.env" });
@@ -19,6 +20,7 @@ const app = express();
 app.use(express.json())
 app.use(morgan('dev'));
 app.use('/api/v1/bootcamps', BootcampsRouter);
+app.use('/api/v1/courses', CoursesRouter)
 
 app.use(errorHandler);
 

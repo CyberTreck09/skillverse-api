@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { BootcampsType } from "../interface/bootcamp";
+import { BootcampsType } from "../interface/bootcamp.interface";
 import slugify from "slugify";
 
 
@@ -106,7 +106,11 @@ BootcampSchema.pre('save', function(next)  {
 
   next()
 
-})
+});
+
+// BootcampSchema.pre('save', function(next) {
+//   this.location = 
+// })
 
 const Bootcamp = mongoose.model<BootcampsType>('Bootcamp', BootcampSchema);
 
