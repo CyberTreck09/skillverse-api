@@ -8,8 +8,20 @@ import asyncHandler from "../middlewares/asyncHandler";
 // @access  Public
 export const getBootcamps = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const bootcamps = await Bootcamp.find({});
-    res.status(200).json({ success: true, data: bootcamps });
+    const query: any = {};
+    
+    // sort by name   
+    if(req.query.housing) {
+      query.housing = req.query.housing
+    }
+
+    if(req.query.email) {
+      query.role = req.query.email;
+    }
+
+    console.log(query)
+    const bootcamps = await Bootcamp.find(query);
+    res.status(200).json({ success: true, count: bootcamps.length, data: bootcamps });
   }
 );
 
@@ -21,7 +33,8 @@ export const getBootcamp = asyncHandler(async (
   res: Response,
   next: NextFunction
 ) => {
-  
+
+    
     const bootamp = await Bootcamp.findById({ _id: req.params.id });
     console.log(bootamp);
     res.status(200).json({ success: true, data: bootamp });

@@ -108,6 +108,9 @@ BootcampSchema.pre('save', function(next)  {
 
 });
 
+
+BootcampSchema.virtual('')
+
 // BootcampSchema.pre('save', function(next) {
 //   this.location = 
 // })

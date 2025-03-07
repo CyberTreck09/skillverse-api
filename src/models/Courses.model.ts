@@ -9,7 +9,8 @@ const CoursesSchema = new mongoose.Schema<CoursesType>({
   weeks: Number,
   tuition: Number,
   minimumSkill: String,
-  scholarhipsAvailable: Boolean
+  scholarhipsAvailable: Boolean,
+  bootcamp: { type: mongoose.Schema.Types.ObjectId, ref: "Bootcamp", required: true }
 });
 
 

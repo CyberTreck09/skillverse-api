@@ -8,11 +8,12 @@ import asyncHandler from "../middlewares/asyncHandler";
 // @access  Public
 export const getCourses = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const courses = await Courses.find({});
+    const courses = await Courses.find({}).populate("bootcamp");
+    console.log(courses)
     res.status(200).json({ success: true, data: courses });
   }
 );
-
+  
 // @desc    Get single course
 // @route   GET /api/v1/courses/:id
 // @access  Public

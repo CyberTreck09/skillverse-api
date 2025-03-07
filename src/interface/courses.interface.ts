@@ -5,4 +5,5 @@ export interface CoursesType {
   tuition: number;
   minimumSkill: string;
   scholarhipsAvailable: boolean;
+  bootcamp: any
 }
